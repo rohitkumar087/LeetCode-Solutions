@@ -9,52 +9,26 @@
  * }
  */
 class Solution {
-    int length(ListNode head,int n){
-        ListNode curr = head;
-        int count = 0;
-
-        while(curr != null){
-            count++;
-            curr = curr.next;
-        }
-        return count-n;
-    }
-
-    ListNode deletionAtHead(ListNode head){
-      if(head == null){
-        return null;
-      }
-     
-      head = head.next;
-     
-      return head;
-    }
-
-     ListNode deletionAtGivenPos(ListNode head, int pos){
-      if(pos == 0){
-        return deletionAtHead(head);
-      }
-      if(head.next == null){
-        return head;
-      }
-     
-      ListNode curr = head;
-     
-      while(pos > 1){
-        curr = curr.next;
-        pos--;
-      }
-     
-      curr.next = curr.next.next;
-     
-      return head;
-    }
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        int pos = length(head,n);
-        
-        head = deletionAtGivenPos(head, pos); 
+        ListNode slow = head;
+        ListNode prev = head;
+        ListNode fast = head;
 
+        for(int i=0;i<n;i++){
+            fast = fast.next; 
+        }
+
+        while(fast != null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        if(slow == head){
+            return head.next;
+        }
+
+        prev.next = slow.next;
         return head;
-
     }
 }
