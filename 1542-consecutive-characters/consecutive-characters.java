@@ -1,7 +1,7 @@
 class Solution {
     public int maxPower(String s) {
         int count = 1;
-        int maxCount = 0;
+        int maxCount = 1;
         int i = 1;
         char prev = s.charAt(0);
         while(i<s.length()){
@@ -16,7 +16,6 @@ class Solution {
             maxCount = Math.max(maxCount,count);
             i++;
         }
-        if(s.length()==1) return 1;
        return maxCount;         
     }
 }
